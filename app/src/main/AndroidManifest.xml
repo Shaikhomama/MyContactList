@@ -37,10 +37,6 @@
         -->
 
         <activity
-            android:name=".MapsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_maps" />
-        <activity
             android:name=".ContactSettingsActivity"
             android:exported="false" />
         <activity
@@ -61,7 +57,7 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyAkCINxwKkdUc1sGz1B3idZq1Kd0im-5ic" />
+            android:value="API Key" />
     </application>
 
 </manifest>
