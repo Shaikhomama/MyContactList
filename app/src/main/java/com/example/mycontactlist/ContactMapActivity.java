@@ -532,4 +532,3 @@ public class ContactMapActivity extends AppCompatActivity implements OnMapReadyC
 }
 
 //E7:BF:8C:AF:E5:0A:6A:C5:3E:AC:2B:39:3B:23:FA:93:8C:4A:DD:DA
-//AIzaSyAkCINxwKkdUc1sGz1B3idZq1Kd0im-5ic

@@ -294,6 +294,17 @@
                 app:layout_constraintBaseline_toBaselineOf="@+id/textBirthday"
                 app:layout_constraintEnd_toEndOf="parent" />
 
+            <ImageButton
+                android:id="@+id/imageContact"
+                android:layout_width="77dp"
+                android:layout_height="75dp"
+                android:layout_marginEnd="8dp"
+                android:scaleType="centerInside"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textContact"
+                app:srcCompat="@drawable/photoicon"
+                tools:ignore="SpeakableTextPresentCheck" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

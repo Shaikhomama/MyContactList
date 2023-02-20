@@ -5,7 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -38,6 +42,13 @@ public class ContactDataSource {
             initialValues.put("email", c.geteMail());
             initialValues.put("birthday", String.valueOf(c.getBirthday().getTimeInMillis()));
 
+            if(c.getPicture() != null){
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                c.getPicture().compress(Bitmap.CompressFormat.PNG,100,baos);
+                byte[] photo = baos.toByteArray();
+                initialValues.put("contactphoto",photo);
+            }
+
             didSucceed = database.insert("contact", null, initialValues) > 0;
         }catch(Exception ex){
             //it will return false if there is no exception
@@ -61,6 +72,12 @@ public class ContactDataSource {
             updateValues.put("email", c.geteMail());
             updateValues.put("birthday", String.valueOf(c.getBirthday().getTimeInMillis()));
 
+            if(c.getPicture() != null){
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                c.getPicture().compress(Bitmap.CompressFormat.PNG,100,baos);
+                byte[] photo = baos.toByteArray();
+                updateValues.put("contactphoto",photo);
+            }
         }catch(Exception ex){
 
         }
@@ -152,6 +169,12 @@ public class ContactDataSource {
             calendar.setTimeInMillis(Long.valueOf(cursor.getString(9)));
             contact.setBirthday(calendar);
             cursor.close();
+        }
+        byte[] photo = cursor.getBlob(10);
+        if(photo != null){
+            ByteArrayInputStream imageStream = new ByteArrayInputStream(photo);
+            Bitmap thePicture = BitmapFactory.decodeStream(imageStream);
+            contact.setPicture(thePicture);
         }
         return contact;
     }
