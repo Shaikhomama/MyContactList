@@ -15,6 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.view.View;
@@ -124,18 +125,22 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         editCity.setEnabled(enabled);
         editState.setEnabled(enabled);
         editZipCode.setEnabled(enabled);
-        editPhone.setEnabled(enabled);
-        editCell.setEnabled(enabled);
+        //editPhone.setEnabled(enabled);
+        //editCell.setEnabled(enabled);
         editEMail.setEnabled(enabled);
         buttonChange.setEnabled(enabled);
         buttonSave.setEnabled(enabled);
 
         if(enabled){
             editName.requestFocus();
+            editPhone.setInputType(InputType.TYPE_CLASS_PHONE);
+            editCell.setInputType(InputType.TYPE_CLASS_PHONE);
         }
         else{
             ScrollView s = findViewById(R.id.scrollview);
             s.fullScroll(ScrollView.FOCUS_UP);
+            editCell.setInputType(InputType.TYPE_NULL);
+            editPhone.setInputType(InputType.TYPE_NULL);
         }
     }
 
