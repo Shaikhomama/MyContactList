@@ -25,8 +25,8 @@ public class Contact {
         return picture;
     }
 
-    public void setPicture(Bitmap picture) {
-        this.picture = picture;
+    public void setPicture(Bitmap b) {
+        picture = b;
     }
 
     public void setContactID(int contactID) {

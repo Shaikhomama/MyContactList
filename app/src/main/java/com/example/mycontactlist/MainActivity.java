@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     final int PERMISSION_REQUEST_PHONE =102;
     final int PERMISSION_REQUEST_CAMERA = 103;
     final int CAMERA_REQUEST = 1888;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         initTextChangedEvents();
         initSaveButton();
         initCallFunction();
+        initImageButton();
 
     }
     private void initListButton(){                                   //connects to ContactListActivity
@@ -392,7 +395,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         EditText editCell = findViewById(R.id.editCell);
         EditText editEMail = findViewById(R.id.editEMail);
         TextView birthday = findViewById(R.id.textBirthday);
-        ImageButton picture = (ImageButton)findViewById(R.id.imageContact);
+        ImageButton picture = findViewById(R.id.imageContact);
 
         editName.setText(currentContact.getContactName());
         editAddress.setText(currentContact.getStreetAddress());
@@ -404,11 +407,12 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         editEMail.setText(currentContact.geteMail());
         birthday.setText(DateFormat.format("MM/dd/yyyy",
                 currentContact.getBirthday().getTimeInMillis()).toString());
+
         if(currentContact.getPicture() != null){
             picture.setImageBitmap(currentContact.getPicture());
         }
         else{
-            picture.setImageResource(R.drawable.photoicon);
+            picture.setImageResource(R.drawable.newphotoicon);
         }
     }
     private void initCallFunction(){
@@ -479,7 +483,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                     takePhoto();
                 }
                 else{
-                    Toast.makeText(this, "You will not be able to save contact pictures from this app", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "You will not be able to save contact pictures from this app", Toast.LENGTH_LONG).show();
                 }
                 return ;
             }
@@ -501,7 +505,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         }
     }
 
-    private void initButton(){
+    private void initImageButton(){
         ImageButton ib = findViewById(R.id.imageContact);
         ib.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -547,13 +551,15 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
     protected void onActivityResult(int requestCode,int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == CAMERA_REQUEST) {
+        if (requestCode == CAMERA_REQUEST) {
             if (resultCode == RESULT_OK) {
+
                 Bitmap photo = (Bitmap) data.getExtras().get("data");
                 Bitmap scaledPhoto = Bitmap.createScaledBitmap(photo, 144, 144, true);
                 ImageButton imageContact = (ImageButton) findViewById(R.id.imageContact);
                 imageContact.setImageBitmap(scaledPhoto);
                 currentContact.setPicture(scaledPhoto);
+                
             }
         }
     }

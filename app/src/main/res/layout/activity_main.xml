@@ -296,13 +296,14 @@
 
             <ImageButton
                 android:id="@+id/imageContact"
-                android:layout_width="77dp"
-                android:layout_height="75dp"
-                android:layout_marginEnd="8dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
                 android:scaleType="centerInside"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textContact"
-                app:srcCompat="@drawable/photoicon"
+                app:srcCompat="@drawable/newphotoicon"
                 tools:ignore="SpeakableTextPresentCheck" />
 
 

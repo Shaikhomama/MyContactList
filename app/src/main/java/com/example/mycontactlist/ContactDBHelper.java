@@ -27,18 +27,20 @@ public class ContactDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        /**
+/**
         Log.w(ContactDBHelper.class.getName(),
                 "Upgrading database from version " + oldVersion + "to "
                         + newVersion + ", which will destroy all old data");
         db.execSQL("DROP TABLE IF EXISTS contact"); //first deletes the old table
         onCreate(db); //then executes onCreate to create new version of table
-   */
+
+ */
         try{
             db.execSQL("ALTER TABLE contact ADD COLUMN contactphoto blob");
         }
         catch(Exception ex){
 
         }
+
     }
 }

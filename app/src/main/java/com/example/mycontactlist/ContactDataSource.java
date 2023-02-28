@@ -78,6 +78,7 @@ public class ContactDataSource {
                 byte[] photo = baos.toByteArray();
                 updateValues.put("contactphoto",photo);
             }
+            didSucceed = database.update("contact",updateValues,"_id="+ rowId,null)>0;
         }catch(Exception ex){
 
         }
@@ -168,14 +169,15 @@ public class ContactDataSource {
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(Long.valueOf(cursor.getString(9)));
             contact.setBirthday(calendar);
+            byte[] photo = cursor.getBlob(10);
+            if(photo != null){
+                ByteArrayInputStream imageStream = new ByteArrayInputStream(photo);
+                Bitmap thePicture = BitmapFactory.decodeStream(imageStream);
+                contact.setPicture(thePicture);
+            }
             cursor.close();
         }
-        byte[] photo = cursor.getBlob(10);
-        if(photo != null){
-            ByteArrayInputStream imageStream = new ByteArrayInputStream(photo);
-            Bitmap thePicture = BitmapFactory.decodeStream(imageStream);
-            contact.setPicture(thePicture);
-        }
+
         return contact;
     }
 
